@@ -12,7 +12,5 @@
     },
     "autoload": {
         "psr-0": { "Fliglio\\Flfc\\": "lib/" }
-    },
-    "target-dir": "Fliglio/Flfc"
-
+    }
 }
