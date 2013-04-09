@@ -1,6 +1,6 @@
 <?php
 
-// namespace Fliglio\Flfc;
+namespace Fliglio\Flfc;
 
 
 class Foo {
