@@ -2,4 +2,4 @@
 
 namespace Fliglio\Flfc;
 
-class CommandNotFoundException extends Exception {}
+class CommandNotFoundException extends \Exception {}

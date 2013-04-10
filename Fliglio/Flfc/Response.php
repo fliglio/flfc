@@ -58,7 +58,7 @@ class Response {
 			throw new ResponseException("Unknown Status Code: " . $this->status);
 		}
 
-		$status = new stdClass();
+		$status = new \stdClass();
 		$status->code    = $this->status;
 		$status->message = self::$statusCodes[$this->status];
 		return $status;

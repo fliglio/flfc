@@ -41,7 +41,7 @@ class FcChainFactory {
 			}
 		}
 		if ($chain == null) {
-			throw new Exception("Couldn't resolve a FrontControllerChain to use");
+			throw new \Exception("Couldn't resolve a FrontControllerChain to use");
 		}
 		
 		return new FcChainRunner($chain);
@@ -55,7 +55,7 @@ class FcChainFactory {
 			}
 		}
 		if ($chain == null) {
-			throw new Exception("Couldn't resolve a FrontControllerChain to use");
+			throw new \Exception("Couldn't resolve a FrontControllerChain to use");
 		}
 		
 		return $chain;

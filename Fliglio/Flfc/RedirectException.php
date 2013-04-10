@@ -2,7 +2,7 @@
 
 namespace Fliglio\Flfc;
 
-class RedirectException extends Exception {
+class RedirectException extends \Exception {
 
 	protected $code;
 	protected $location;

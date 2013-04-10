@@ -2,4 +2,4 @@
 
 namespace Fliglio\Flfc;
 
-class ResponseException extends Exception {}
+class ResponseException extends \Exception {}
