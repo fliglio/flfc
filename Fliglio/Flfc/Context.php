@@ -16,6 +16,8 @@ class Context {
 	public static function get() {
 		if(is_null(self::$instance)) {
 			self::$instance = new self();
+		        self::$instance->setRequest(new Request());
+		        self::$instance->setResponse(new Response());
 		}
 		return self::$instance;
 	}
