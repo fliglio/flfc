@@ -26,20 +26,20 @@ class Request {
 
 	private $rawInputStream;
 
-	private $pageNotFoundUrl;
-	private $errorUrl;
+	public static function createDefault() {
+		$inst = new self();
+		$inst->setCurrentUrl('/' . ltrim($_SERVER['REQUEST_URI'], '/'));
 
+		$inst->setRawInputStream(file_get_contents('php://input'));
+		$inst->setParams($_REQUEST);
+		return $inst;
+	}
+	
 	public function getRawInputStream() {                  return $this->rawInputStream; }
 	public function setRawInputStream($rawInputStream) {   $this->rawInputStream = $rawInputStream; }
 	
 	public function setCurrentUrl($url) {                  $this->currentUrl = $url;  return $this;}
 	public function getCurrentUrl() {                      return $this->currentUrl; }
-
-	public function getPageNotFoundUrl() {                 return $this->pageNotFoundUrl; }
-	public function setPageNotFoundUrl($pageNotFoundUrl) { $this->pageNotFoundUrl = $pageNotFoundUrl; }
-
-	public function getErrorUrl() {                        return $this->errorUrl; }
-	public function setErrorUrl($errorUrl) {               $this->errorUrl = $errorUrl; }
 
 	public function setCommand($cmd) {    $this->command = $cmd;     return $this; }
 	public function isCommandSet() {      return isset($this->command); }

@@ -9,22 +9,12 @@ namespace Fliglio\Flfc;
  */
 class Context {
 
-	private static $instance;
 	private $request;
 	private $response;
 
-	public static function get() {
-		if(is_null(self::$instance)) {
-			self::$instance = new self();
-		        self::$instance->setRequest(new Request());
-		        self::$instance->setResponse(new Response());
-		}
-		return self::$instance;
-	}
-
-	public static function set(Context $context) {
-		self::$instance = $context;
-		return self::get();
+	public function __construct(Request $request, Response $response){
+		$this->request  = $request;
+		$this->response = $response;
 	}
 
 	public function getRequest() {

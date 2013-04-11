@@ -10,13 +10,13 @@ class FcChainRunner {
 		$this->chain = $chain;
 	}
 	
-	public function dispatchRequest(Context $context) {
+	public function dispatchRequest(Context $context, $pnfUrl, $errorUrl) {
 		try {
 			$chain = FcChainFactory::getChain($context);
 			$chain->call($context);
 
 		} catch (PageNotFoundException $e) {
-			$context->getRequest()->setCurrentUrl($context->getRequest()->getPageNotFoundUrl());
+			$context->getRequest()->setCurrentUrl($pnfUrl);
 			$chain = FcChainFactory::getChain($context);
 
 			$chain->call($context);
@@ -28,7 +28,7 @@ class FcChainRunner {
 			$chain->call($context);
 
 		} catch (Exception $e) {
-			$context->getRequest()->setCurrentUrl($context->getRequest()->getErrorUrl());
+			$context->getRequest()->setCurrentUrl($errorUrl);
 			$context->getRequest()->setProp('exception', $e);
 			$chain = FcChainFactory::getChain($context);
 

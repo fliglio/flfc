@@ -40,12 +40,24 @@ class Response {
 	private $props  = array();
 	
 
-	public function setContent($content) {  $this->content = $content; return $this; }
-	public function getContent() {          return $this->content; }
-	public function hasContent() {          return isset( $this->content ); }
+	public function setContent(ResponseContent $content) {  
+		$this->content = $content; 
+		return $this;
+	}
+	public function getContent() {
+		return $this->content;
+	}
+	public function hasContent() {
+		return isset($this->content);
+	}
 	
-	public function addHeader($key, $val) { $this->headers[$key] = $val; return $this; }
-	public function getHeaders() {          return $this->headers; }
+	public function addHeader($key, $val) { 
+		$this->headers[$key] = $val; 
+		return $this;
+	}
+	public function getHeaders() {
+		return $this->headers;
+	}
 
 	public function setStatus($code) {
 		$this->status = $code; 
