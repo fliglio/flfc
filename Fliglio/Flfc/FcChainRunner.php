@@ -27,7 +27,7 @@ class FcChainRunner {
 
 			$chain->call($context);
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			$context->getRequest()->setCurrentUrl($errorUrl);
 			$context->getRequest()->setProp('exception', $e);
 			$chain = FcChainFactory::getChain($context);
