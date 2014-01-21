@@ -28,10 +28,13 @@ class Request {
 
 	public static function createDefault() {
 		$inst = new self();
-		$inst->setCurrentUrl('/' . ltrim($_SERVER['REQUEST_URI'], '/'));
 
+		$urlParts = parse_url($_SERVER['REQUEST_URI']);
+
+		$inst->setCurrentUrl('/' . ltrim($urlParts['path'], '/'));
 		$inst->setRawInputStream(file_get_contents('php://input'));
 		$inst->setParams($_REQUEST);
+
 		return $inst;
 	}
 	
