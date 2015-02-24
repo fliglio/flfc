@@ -41,8 +41,7 @@ class Response {
 	
 
 	public function setContent(ResponseContent $content) {  
-		$this->content = $content; 
-		return $this;
+		$this->content = $content;
 	}
 	public function getContent() {
 		return $this->content;
@@ -52,16 +51,14 @@ class Response {
 	}
 	
 	public function addHeader($key, $val) { 
-		$this->headers[$key] = $val; 
-		return $this;
+		$this->headers[$key] = $val;
 	}
 	public function getHeaders() {
 		return $this->headers;
 	}
 
 	public function setStatus($code) {
-		$this->status = $code; 
-		return $this; 
+		$this->status = $code;
 	}
 
 	public function getStatus() {
@@ -78,7 +75,6 @@ class Response {
 	
 	public function setProp($key, $val) {
 		$this->props[$key] = $val;
-		return $this;
 	}
 
 	public function getProp($key) {
