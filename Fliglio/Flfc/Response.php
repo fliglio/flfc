@@ -31,7 +31,7 @@ class Response {
 	private $content; 
 	
 	/* HTTP Response code */
-	private $status  = 200;
+	private $status  = null;
 	
 	/* Headers set on response */
 	private $headers = array();
@@ -62,7 +62,9 @@ class Response {
 	}
 
 	public function getStatus() {
-		
+		if (is_null($this->status)) {
+			return null;
+		}
 		if (!isset(self::$statusCodes[$this->status])) {
 			throw new ResponseException("Unknown Status Code: " . $this->status);
 		}

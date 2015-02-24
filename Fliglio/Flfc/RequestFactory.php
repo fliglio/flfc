@@ -9,9 +9,10 @@ class RequestFactory {
 	public function createDefault() {
 		$inst = new Request();
 
-		$inst->setHost(self::getHost());
 		$inst->setProtocol(self::getProtocol());
+		$inst->setHost(self::getHost());
 		$inst->setCurrentUrl(self::getCurrentUrl());
+		$inst->setHttpMethod(self::getHttpMethod());
 		$inst->setPostData(self::getPostData());
 		$inst->setGetParams(self::getGetParams());
 
@@ -39,6 +40,10 @@ class RequestFactory {
 		$isHttps = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on';
 
 		return $isHttps ? HttpAttributes::HTTPS : HttpAttributes::HTTP;
+	}
+
+	private static function getHttpMethod() {
+		return $_SERVER['REQUEST_METHOD'];
 	}
 
 	private static function getCurrentUrl() {

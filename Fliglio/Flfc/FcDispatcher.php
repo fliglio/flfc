@@ -24,12 +24,15 @@ class FcDispatcher {
 			$chain->call($this->context);
 
 		} catch (InternalRedirectException $e) {
+			error_log($e->getMessage());
 			$this->context->getRequest()->setCurrentUrl($e->getUrl());
 
 			$chain = $this->chains->getChain($this->context);
 			$chain->call($this->context);
 
 		} catch (\Exception $e) {
+			error_log($e->getMessage());
+			error_log((string)$e);
 			$this->context->getRequest()->setCurrentUrl($this->errorUrl);
 			$this->context->getRequest()->setProp('exception', $e);
 
