@@ -56,6 +56,9 @@ class Response {
 	public function getHeaders() {
 		return $this->headers;
 	}
+	public function hasHeader($key) {
+		return isset($this->headers[$key]);
+	}
 
 	public function setStatus($code) {
 		$this->status = $code;
