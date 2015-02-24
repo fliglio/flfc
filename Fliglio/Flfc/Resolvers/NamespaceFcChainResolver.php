@@ -1,6 +1,9 @@
 <?php
 
-namespace Fliglio\Flfc;
+namespace Fliglio\Flfc\Resolvers;
+
+use Fliglio\Flfc\Apps\App;
+use Fliglio\Flfc\Context;
 
 class NamespaceFcChainResolver implements ResolvableFcChain {
 	private $chain;

@@ -1,6 +1,12 @@
 <?php
 
-namespace Fliglio\Flfc;
+namespace Fliglio\Flfc\Apps;
+
+use Fliglio\Flfc\Context;
+use Fliglio\Flfc\HasHeadersToSet;
+use Fliglio\Flfc\Exceptions\RedirectException;
+use Fliglio\Flfc\Exceptions\Streamable;
+use Fliglio\Flfc\ResponseContent;
 
 /**
  * 
@@ -62,12 +68,16 @@ class HttpApp extends MiddleWare {
 
 		if ($response->getContent()) {
 			switch (true) {
-				case $response->getContent() instanceof Streamable :
-					$response->getContent()->stream();
-					break;
-				case $response->getContent() instanceof ResponseContent :
-					print $response->getContent()->render();
-					break;
+			case $response->getContent() instanceof Streamable :
+				$response->getContent()->stream();
+				break;
+			case $response->getContent() instanceof ResponseContent :
+				print $response->getContent()->render();
+				break;
+			default:
+				if ($response->getContent() !== null) {
+					error_log(sprintf("Class '%s' not Streamable or ResponseContent",get_class($response->getContent())));
+				}
 			}
 		}
 	}

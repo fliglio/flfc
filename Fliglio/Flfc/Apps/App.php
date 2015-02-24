@@ -1,6 +1,8 @@
 <?php
 
-namespace Fliglio\Flfc;
+namespace Fliglio\Flfc\Apps;
+
+use Fliglio\Flfc\Context;
 
 /**
  * 

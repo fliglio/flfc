@@ -2,6 +2,9 @@
 
 namespace Fliglio\Flfc;
 
+use Fliglio\Flfc\Apps\App;
+use Fliglio\Flfc\Resolvers\ResolvableFcChain;
+
 class FcChainFactory {
 
 	const DEFAULT_CHAIN = "default";

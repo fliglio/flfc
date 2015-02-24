@@ -1,6 +1,8 @@
 <?php
 
-namespace Fliglio\Flfc;
+namespace Fliglio\Flfc\Resolvers;
+
+use Fliglio\Flfc\Context;
 
 interface ResolvableFcChain {
 	public function getChain(); // FlfcApp

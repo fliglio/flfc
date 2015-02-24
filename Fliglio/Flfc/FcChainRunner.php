@@ -2,6 +2,10 @@
 
 namespace Fliglio\Flfc;
 
+use Fliglio\Flfc\Apps\App;
+use Fliglio\Flfc\Exceptions\PageNotFoundException;
+use Fliglio\Flfc\Exceptions\InternalRedirectException;
+
 class FcChainRunner {
 	
 	private $chain;
@@ -15,11 +19,11 @@ class FcChainRunner {
 			$chain = FcChainFactory::getChain($context);
 			$chain->call($context);
 
-		} catch (PageNotFoundException $e) {
-			$context->getRequest()->setCurrentUrl($pnfUrl);
-			$chain = FcChainFactory::getChain($context);
+		// } catch (PageNotFoundException $e) {
+		// 	$context->getRequest()->setCurrentUrl($pnfUrl);
+		// 	$chain = FcChainFactory::getChain($context);
 
-			$chain->call($context);
+		// 	$chain->call($context);
 
 		} catch (InternalRedirectException $e) {
 			$context->getRequest()->setCurrentUrl($e->getUrl());

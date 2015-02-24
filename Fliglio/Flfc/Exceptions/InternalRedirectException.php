@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Fliglio\Flfc;
+namespace Fliglio\Flfc\Exceptions;
 
 class InternalRedirectException extends \Exception {
 	private $url;
-	public function __construct($url) {
+	public function __construct($url, $message = "") {
 		$this->url = $url;
 	}
 	public function getUrl() {

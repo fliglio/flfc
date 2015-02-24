@@ -1,5 +1,5 @@
 <?php
 
-namespace Fliglio\Flfc;
+namespace Fliglio\Flfc\Exceptions;
 
 class CommandNotFoundException extends \Exception {}
