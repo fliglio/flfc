@@ -2,6 +2,8 @@
 
 namespace Fliglio\Flfc;
 
+use Fliglio\Http\RequestReader;
+
 /**
  * Context
  *
@@ -12,7 +14,7 @@ class Context {
 	private $request;
 	private $response;
 
-	public function __construct(Request $request, Response $response){
+	public function __construct(RequestReader $request, Response $response){
 		$this->request  = $request;
 		$this->response = $response;
 	}
@@ -20,7 +22,7 @@ class Context {
 	public function getRequest() {
 		return $this->request;
 	}
-	public function setRequest(Request $req) {
+	public function setRequest(RequestReader $req) {
 		$this->request = $req;
 		return $this->getRequest();
 	}

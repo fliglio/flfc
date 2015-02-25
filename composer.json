@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "fliglio/http": "dev-master"
     },
     "autoload": {
         "psr-0": { "Fliglio\\Flfc\\": "" }

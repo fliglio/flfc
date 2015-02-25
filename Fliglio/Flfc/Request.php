@@ -2,7 +2,9 @@
 
 namespace Fliglio\Flfc;
 
-class Request {
+use Fliglio\Http\RequestReader;
+
+class Request implements RequestReader {
 	
 	private $host;
 
@@ -10,7 +12,7 @@ class Request {
 	private $protocol;
 
 	/* url of current request */
-	private $currentUrl;
+	private $url;
 
 	/* http method (GET, POST...) */
 	private $method;
@@ -35,17 +37,17 @@ class Request {
 
 	}
 
-	public function setHost($host) {                  $this->host = $host; }
-	public function getHost() {                       return $this->host; }
+	public function setHttpMethod($method) {          $this->method = $method; }
+	public function getHttpMethod() {                 return $this->method; }
 
 	public function setProtocol($protocol) {          $this->protocol = $protocol; }
 	public function getProtocol() {                   return $this->protocol; }
 
-	public function setCurrentUrl($url) {             $this->currentUrl = $url; }
-	public function getCurrentUrl() {                 return $this->currentUrl; }
+	public function setHost($host) {                  $this->host = $host; }
+	public function getHost() {                       return $this->host; }
 
-	public function setHttpMethod($method) {          $this->method = $method; }
-	public function getHttpMethod() {                 return $this->method; }
+	public function setUrl($url) {                    $this->url = $url; }
+	public function getUrl() {                        return $this->url; }
 
 	public function setGetParams(array $getParams) {  $this->getParams = $getParams; }
 	public function getGetParams() {                  return $this->getParams; }
@@ -53,21 +55,6 @@ class Request {
 	public function setPostData($postData) {          $this->postData = $postData; }
 	public function getPostData() {                   return $this->postData; }
 	
-
-
-	public function setCommand($cmd) {    $this->command = $cmd; }
-	public function isCommandSet() {      return isset($this->command); }
-	public function getCommand() {        return $this->command; }
-
-
-	public function setProp($key, $val) { $this->props[$key] = $val; }
-	public function isPropSet($key) {     return isset($this->props[$key]); }
-	public function getProp($key) {       return $this->props[$key]; }
-	public function getProps() {          return $this->props; }
-	public function unsetProp($key) {     unset($this->props[$key]); }
-	
-
-
 	public function addHeader($key, $val) { 
 		$this->headers[strtolower($key)] = $val;
 	}
@@ -80,5 +67,12 @@ class Request {
 	public function getHeader($key) { 
 		return $this->headers[strtolower($key)];
 	}
+
+
+	public function setProp($key, $val) { $this->props[$key] = $val; }
+	public function isPropSet($key) {     return isset($this->props[$key]); }
+	public function getProp($key) {       return $this->props[$key]; }
+	public function getProps() {          return $this->props; }
+	public function unsetProp($key) {     unset($this->props[$key]); }
 
 }

@@ -11,7 +11,7 @@ class RequestFactory {
 
 		$inst->setProtocol(self::getProtocol());
 		$inst->setHost(self::getHost());
-		$inst->setCurrentUrl(self::getCurrentUrl());
+		$inst->setUrl(self::getCurrentUrl());
 		$inst->setHttpMethod(self::getHttpMethod());
 		$inst->setPostData(self::getPostData());
 		$inst->setGetParams(self::getGetParams());
