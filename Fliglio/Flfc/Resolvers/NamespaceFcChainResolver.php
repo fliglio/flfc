@@ -19,7 +19,7 @@ class NamespaceFcChainResolver implements ResolvableFcChain {
 	}
 	
 	public function canResolve(Context $context) {
-		$uri = $context->getRequest()->getCurrentUrl();
+		$uri = $context->getRequest()->getUrl();
 		$u = ltrim($uri, "/");
 		$ns = ltrim($this->ns, "/");
 		return substr($u, 0, strlen($ns)) == $ns;
