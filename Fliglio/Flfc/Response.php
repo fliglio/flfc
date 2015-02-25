@@ -2,12 +2,10 @@
 
 namespace Fliglio\Flfc;
 
-/**
- * Flfc_Response
- *
- * @package Fl
- **/
-class Response {
+use Fliglio\Http\ResponseWriter;
+use Fliglio\Http\ResponseBody;
+
+class Response implements ResponseWriter {
 
 	public static $statusCodes = array(
 		100 => 'Continue',                      300 => 'Multiple Choices',      400 => 'Bad Request',                   411 => 'Length Required',
@@ -32,32 +30,46 @@ class Response {
 	
 	/* HTTP Response code */
 	private $status  = null;
+
+	/* HTTP content type */
+	private $contentType  = null;
 	
 	/* Headers set on response */
 	private $headers = array();
 	
-	/* storage for additional properties */
-	private $props  = array();
-	
 
-	public function setContent(ResponseContent $content) {  
+	public function setBody(ResponseBody $content) {  
 		$this->content = $content;
 	}
-	public function getContent() {
+	public function getBody() {
 		return $this->content;
-	}
-	public function hasContent() {
-		return isset($this->content);
 	}
 	
 	public function addHeader($key, $val) { 
 		$this->headers[$key] = $val;
 	}
 	public function getHeaders() {
-		return $this->headers;
+		$headers = $this->headers;
+
+		if (!is_null($this->contentType)) {
+			$headers['Content-Type'] = $this->contentType;
+		}
+		if (!is_null($this->status)) {
+			$key = "HTTP/1.1 " . $this->status;
+			$val = self::$statusCodes[$this->status];
+			$headers[$key] = $val;
+		}
+		return $headers;
 	}
 	public function hasHeader($key) {
 		return isset($this->headers[$key]);
+	}
+
+	public function setContentType($type) {  
+		$this->contentType = $type;
+	}
+	public function getContentType() {
+		return $this->contentType;
 	}
 
 	public function setStatus($code) {
@@ -65,35 +77,8 @@ class Response {
 	}
 
 	public function getStatus() {
-		if (is_null($this->status)) {
-			return null;
-		}
-		if (!isset(self::$statusCodes[$this->status])) {
-			throw new ResponseException("Unknown Status Code: " . $this->status);
-		}
-
-		$status = new \stdClass();
-		$status->code    = $this->status;
-		$status->message = self::$statusCodes[$this->status];
-		return $status;
+		return $this->status;
 	}
-	
-	public function setProp($key, $val) {
-		$this->props[$key] = $val;
-	}
-
-	public function getProp($key) {
-		return $this->props[$key];
-	}
-
-	public function isPropSet($key) {
-		return isset($this->props[$key]);
-	}
-	
-	public function getProps() {
-		return $this->props;
-	}
-	
 	
 }
 

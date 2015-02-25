@@ -18,8 +18,8 @@ class HttpApp extends MiddleWare {
 			$to = $this->wrappedApp->call($context);
 			if (is_object($to)) {
 				$reflector = new \ReflectionClass(get_class($to));
-				if ($reflector->implementsInterface("Fliglio\Flfc\ResponseContent")) {
-					$context->GetResponse()->setContent($to);
+				if ($reflector->implementsInterface("Fliglio\Http\ResponseBody")) {
+					$context->getResponse()->setBody($to);
 				}
 			} 
 
@@ -30,22 +30,18 @@ class HttpApp extends MiddleWare {
 
 		$response = $context->getResponse();
 
-		$status = $response->getStatus();
-		if ($status === null) {
+		if (is_null($response->getStatus())) {
 			$response->setStatus(200);
-			$status = $response->getStatus();
 		}
-
-		$response->addHeader("HTTP/1.1 " . $status->code, $status->message);
 				
 		$headers = $response->getHeaders();		
 		foreach ($headers AS $key => $val) {
 			header($key . ": " . $val);
 		}
 
-		if ($response->getContent()) {
+		if ($response->getBody()) {
 
-			$chunks = $response->getContent()->render();
+			$chunks = $response->getBody()->value();
 			foreach ($chunks as $chunk) {
 				print $chunk;
 			}

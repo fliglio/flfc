@@ -13,34 +13,34 @@ class RestApp extends MiddleWare {
 		$resp = $context->getResponse();
 
 		$content = null;
-		$to = null;
 		try {
 			$to = $this->wrappedApp->call($context);
+
+			if (is_object($to)) {
+				$reflector = new \ReflectionClass(get_class($to));
+				if ($reflector->implementsInterface("Fliglio\Http\ResponseBody")) {
+					$content = $to;
+				}
+			} 
+
+			if (is_null($content)) {
+				$json = is_null($to) ? '' : json_encode($to);
+				$content = new DefaultView($json);
+			}
 		} catch (PageNotFoundException $e) {
 			$resp->setStatus(404);
-			$resp->addHeader('Content-Type', 'text/json');
+			$resp->addHeader('Content-Type', 'application/json');
 		} catch (BadRequestException $e) {
 			error_log((string)$e);
 			$resp->setStatus(500);
-			$resp->addHeader('Content-Type', 'text/json');
+			$resp->addHeader('Content-Type', 'application/json');
 		}	
 
-		if (is_object($to)) {
-			$reflector = new \ReflectionClass(get_class($to));
-			if ($reflector->implementsInterface("Fliglio\Flfc\ResponseContent")) {
-				$content = $to;
-			}
-		} 
 
-		if (is_null($content)) {
-			$json = is_null($to) ? '' : json_encode($to);
-			$content = new DefaultView($json);
-		}
+		$resp->setBody($content);
 
-		$resp->setContent($content);
-
-		if (!$resp->hasHeader('Content-Type')) {
-			$resp->addHeader('Content-Type', 'text/json');
+		if (is_null($resp->getContentType())) {
+			$resp->setContentType('application/json');
 		}
 	}
 

@@ -23,14 +23,6 @@ class Request implements RequestReader {
 	/* GET request parameters, e.g. $_GET*/
 	private $getParams = array();
 
-
-
-	/* module/commandGroup/command this request maps to */
-	private $command;
-
-	/* custom properties set on the request object by the application */
-	private $props = array();
-
 	private $postData;
 
 	public function __construct() {
@@ -67,12 +59,4 @@ class Request implements RequestReader {
 	public function getHeader($key) { 
 		return $this->headers[strtolower($key)];
 	}
-
-
-	public function setProp($key, $val) { $this->props[$key] = $val; }
-	public function isPropSet($key) {     return isset($this->props[$key]); }
-	public function getProp($key) {       return $this->props[$key]; }
-	public function getProps() {          return $this->props; }
-	public function unsetProp($key) {     unset($this->props[$key]); }
-
 }

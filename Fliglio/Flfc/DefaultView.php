@@ -2,7 +2,9 @@
 
 namespace Fliglio\Flfc;
 
-class DefaultView implements ResponseContent {
+use Fliglio\Http\ResponseBody;
+
+class DefaultView implements ResponseBody {
 	
 	protected $content;
 	
@@ -10,7 +12,7 @@ class DefaultView implements ResponseContent {
 		$this->content = (string)$content;
 	}
 	
-	public function render() {
+	public function value() {
 		return array($this->content);
 	}
 }

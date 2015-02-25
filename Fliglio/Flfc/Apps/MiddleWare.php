@@ -1,11 +1,8 @@
 <?php
 
 namespace Fliglio\Flfc\Apps;
+use Fliglio\Flfc\ChainData;
 
-/**
- * 
- * @package Fl
- */
 abstract class MiddleWare extends App {
 	protected $wrappedApp;
 	
