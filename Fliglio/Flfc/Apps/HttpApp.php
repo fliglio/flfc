@@ -15,7 +15,14 @@ class HttpApp extends MiddleWare {
 		/* Call Child App
 		 */
 		try {
-			$this->wrappedApp->call($context);
+			$to = $this->wrappedApp->call($context);
+			if (is_object($to)) {
+				$reflector = new \ReflectionClass(get_class($to));
+				if ($reflector->implementsInterface("Fliglio\Flfc\ResponseContent")) {
+					$context->GetResponse()->setContent($to);
+				}
+			} 
+
 		} catch (RedirectException $e) {
 			$context->getResponse()->addHeader("Location", (string)$e->getLocation());
 			$context->getResponse()->setStatus($e->getStatusCode());

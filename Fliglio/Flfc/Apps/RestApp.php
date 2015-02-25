@@ -42,8 +42,6 @@ class RestApp extends MiddleWare {
 		if (!$resp->hasHeader('Content-Type')) {
 			$resp->addHeader('Content-Type', 'text/json');
 		}
-
-		return $resp;
 	}
 
 }
