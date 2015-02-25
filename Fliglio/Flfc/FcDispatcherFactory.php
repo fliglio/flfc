@@ -18,7 +18,7 @@ class FcDispatcherFactory {
 
 		$context = new Context($reqF->createDefault(), new Response());
 
-		return new FcDispatcher($chains, $context, '@404', '@error');
+		return new FcDispatcher($chains, $context, '@error');
 	}
 
 	
