@@ -23,16 +23,14 @@ class HttpApp extends MiddleWare {
 
 		$response = $context->getResponse();
 
-		if ($context->isPropSet('rawResponse')) {
-			$to = $context->getProp('rawResponse');
-
-			if (is_object($to)) {
-				$reflector = new \ReflectionClass(get_class($to));
-				if ($reflector->implementsInterface("Fliglio\Http\ResponseBody")) {
-					$response->setBody($to);
-					$context->unsetProp('rawResponse');
-				}
-			} 
+		$body = $response->getBody();
+		if (!is_null($body)) {
+			if ($body instanceof Fliglio\Flfc\RawView) {
+				$json = is_null($body->value()) ? '' : json_encode($to);
+				$response->setBody(new DefaultView($json));
+			}
+		} else {
+			$response->setBody(new DefaultView(''));
 		}
 
 
@@ -46,11 +44,7 @@ class HttpApp extends MiddleWare {
 		}
 
 		if ($response->getBody()) {
-
-			$chunks = $response->getBody()->value();
-			foreach ($chunks as $chunk) {
-				print $chunk;
-			}
+			print $response->getBody()->value();
 		}
 	}
 }

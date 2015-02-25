@@ -3,6 +3,7 @@
 namespace Fliglio\Flfc\Apps;
 
 use Fliglio\Flfc\Context;
+use Fliglio\Flfc\RawView;
 use Fliglio\Flfc\DefaultView;
 use Fliglio\Flfc\Exceptions\PageNotFoundException;
 use Fliglio\Flfc\Exceptions\BadRequestException;
@@ -26,25 +27,14 @@ class RestApp extends MiddleWare {
 			return;
 		}	
 
-		// if rawResponse is a ResponseBody, use it
-		if ($context->isPropSet('rawResponse')) {
-			$to = $context->getProp('rawResponse');
-
-			if (is_object($to)) {
-				$reflector = new \ReflectionClass(get_class($to));
-				if ($reflector->implementsInterface("Fliglio\Http\ResponseBody")) {
-					$response->setBody($to);
-					$context->unsetProp('rawResponse');
-				}
-			} 
-		}
-
-		// if rawResponse is unknown type, json_encode it
-		if ($context->isPropSet('rawResponse')) {
-			$to = $context->getProp('rawResponse');
-			$json = is_null($to) ? '' : json_encode($to);
-			$response->setBody(new DefaultView($json));
-			$context->unsetProp('rawResponse');
+		$body = $response->getBody();
+		if (!is_null($body)) {
+			if ($body instanceof RawView) {
+				$json = is_null($body->value()) ? '' : json_encode($body->value());
+				$response->setBody(new DefaultView($json));
+			}
+		} else {
+			$response->setBody(new DefaultView(''));
 		}
 
 		if (is_null($response->getContentType())) {
