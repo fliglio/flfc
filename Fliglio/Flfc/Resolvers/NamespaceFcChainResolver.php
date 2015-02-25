@@ -23,8 +23,6 @@ class NamespaceFcChainResolver implements ResolvableFcChain {
 		$u = ltrim($uri, "/");
 		$ns = ltrim($this->ns, "/");
 		return substr($u, 0, strlen($ns)) == $ns;
-		// $path = explode("/", ltrim($uri, "/"));
-		// return isset($path[0]) && $path[0] == $this->ns;
 	}
 
 }
