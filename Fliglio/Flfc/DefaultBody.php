@@ -4,7 +4,7 @@ namespace Fliglio\Flfc;
 
 use Fliglio\Http\RenderableResponseBody;
 
-class DefaultView implements RenderableResponseBody {
+class DefaultBody implements RenderableResponseBody {
 	
 	private $content; // string
 	

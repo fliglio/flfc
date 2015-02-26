@@ -4,7 +4,7 @@ namespace Fliglio\Flfc;
 
 use Fliglio\Http\ResponseBody;
 
-class UnmarshalledView implements ResponseBody {
+class UnmarshalledBody implements ResponseBody {
 	
 	private $content; // mixed
 	

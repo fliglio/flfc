@@ -8,8 +8,7 @@ use Fliglio\Flfc\Exceptions\RedirectException;
 use Fliglio\Flfc\Exceptions\Streamable;
 use Fliglio\Flfc\ResponseContent;
 use Fliglio\Flfc\Response;
-use Fliglio\Flfc\UnmarshalledView;
-use Fliglio\Flfc\DefaultView;
+use Fliglio\Flfc\DefaultBody;
 use Fliglio\Http\RenderableResponseBody;
 
 class HttpApp extends MiddleWare {
@@ -30,13 +29,13 @@ class HttpApp extends MiddleWare {
 		if (!is_null($body)) {
 			if (!($body instanceof RenderableResponseBody)) {
 				if (is_string($body->getContent())) {
-					$response->setBody(new DefaultView($body->getContent()));
+					$response->setBody(new DefaultBody($body->getContent()));
 				} else {
-					$response->setBody(new DefaultView(''));
+					$response->setBody(new DefaultBody(''));
 				}
 			}
 		} else {
-			$response->setBody(new DefaultView(''));
+			$response->setBody(new DefaultBody(''));
 		}
 
 
