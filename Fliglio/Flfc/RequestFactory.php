@@ -43,7 +43,7 @@ class RequestFactory {
 	}
 
 	private static function getHttpMethod() {
-		return $_SERVER['REQUEST_METHOD'];
+		return strtolower($_SERVER['REQUEST_METHOD']);
 	}
 
 	private static function getCurrentUrl() {
