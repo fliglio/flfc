@@ -4,17 +4,15 @@ namespace Fliglio\Flfc;
 
 use Fliglio\Http\ResponseBody;
 
-class RawView implements ResponseBody {
+class UnmarshalledView implements ResponseBody {
 	
-	protected $content;
+	private $content; // mixed
 	
 	public function __construct($content) {
 		$this->content = $content;
 	}
+
 	public function getContent() {
-		return $this->content;
-	}
-	public function value() {
 		return $this->content;
 	}
 }

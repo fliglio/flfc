@@ -3,7 +3,7 @@
 namespace Fliglio\Flfc\Apps;
 
 use Fliglio\Flfc\Context;
-use Fliglio\Flfc\RawView;
+use Fliglio\Flfc\UnmarshalledView;
 use Fliglio\Flfc\DefaultView;
 use Fliglio\Flfc\Exceptions\PageNotFoundException;
 use Fliglio\Flfc\Exceptions\BadRequestException;
@@ -29,8 +29,8 @@ class RestApp extends MiddleWare {
 
 		$body = $response->getBody();
 		if (!is_null($body)) {
-			if ($body instanceof RawView) {
-				$json = is_null($body->value()) ? '' : json_encode($body->value());
+			if (!($body instanceof RenderableResponseBody)) {
+				$json = is_null($body->getContent()) ? '' : json_encode($body->getContent());
 				$response->setBody(new DefaultView($json));
 			}
 		} else {

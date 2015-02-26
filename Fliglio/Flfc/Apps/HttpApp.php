@@ -8,6 +8,9 @@ use Fliglio\Flfc\Exceptions\RedirectException;
 use Fliglio\Flfc\Exceptions\Streamable;
 use Fliglio\Flfc\ResponseContent;
 use Fliglio\Flfc\Response;
+use Fliglio\Flfc\UnmarshalledView;
+use Fliglio\Flfc\DefaultView;
+use Fliglio\Http\RenderableResponseBody;
 
 class HttpApp extends MiddleWare {
 	public function call(Context $context) {
@@ -25,9 +28,12 @@ class HttpApp extends MiddleWare {
 
 		$body = $response->getBody();
 		if (!is_null($body)) {
-			if ($body instanceof Fliglio\Flfc\RawView) {
-				$json = is_null($body->value()) ? '' : json_encode($to);
-				$response->setBody(new DefaultView($json));
+			if (!($body instanceof RenderableResponseBody)) {
+				if (is_string($body->getContent())) {
+					$response->setBody(new DefaultView($body->getContent()));
+				} else {
+					$response->setBody(new DefaultView(''));
+				}
 			}
 		} else {
 			$response->setBody(new DefaultView(''));
@@ -44,7 +50,7 @@ class HttpApp extends MiddleWare {
 		}
 
 		if ($response->getBody()) {
-			print $response->getBody()->value();
+			$response->getBody()->render();
 		}
 	}
 }
