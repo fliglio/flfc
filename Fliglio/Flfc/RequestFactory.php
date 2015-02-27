@@ -3,6 +3,7 @@
 namespace Fliglio\Flfc;
 
 use Fliglio\Http\Http;
+use Fliglio\Web\Url;
 
 class RequestFactory {
 
@@ -48,7 +49,8 @@ class RequestFactory {
 
 	private static function getCurrentUrl() {
 		$urlParts = parse_url($_SERVER['REQUEST_URI']);
-		return '/' . ltrim($urlParts['path'], '/');
+		$str = '/' . ltrim($urlParts['path'], '/');
+		return Url::fromString($str);
 	}
 
 	private static function getPostData() {
