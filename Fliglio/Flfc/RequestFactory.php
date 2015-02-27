@@ -2,7 +2,7 @@
 
 namespace Fliglio\Flfc;
 
-use Fliglio\Web\HttpAttributes;
+use Fliglio\Http\Http;
 
 class RequestFactory {
 
@@ -39,7 +39,7 @@ class RequestFactory {
 	private static function getProtocol() {
 		$isHttps = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on';
 
-		return $isHttps ? HttpAttributes::HTTPS : HttpAttributes::HTTP;
+		return $isHttps ? Http::HTTPS : Http::HTTP;
 	}
 
 	private static function getHttpMethod() {
