@@ -10,6 +10,7 @@ use Fliglio\Flfc\ResponseContent;
 use Fliglio\Flfc\Response;
 use Fliglio\Flfc\DefaultBody;
 use Fliglio\Http\RenderableResponseBody;
+use Fliglio\Http\Http;
 
 class HttpApp extends MiddleWare {
 	public function call(Context $context) {
@@ -40,7 +41,7 @@ class HttpApp extends MiddleWare {
 
 
 		if (is_null($response->getStatus())) {
-			$response->setStatus(200);
+			$response->setStatus(Http::STATUS_OK);
 		}
 				
 		$headers = $response->getHeaders();		

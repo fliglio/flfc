@@ -4,6 +4,7 @@ namespace Fliglio\Flfc;
 
 use Fliglio\Http\ResponseWriter;
 use Fliglio\Http\ResponseBody;
+use Fliglio\Http\Http;
 
 class Response implements ResponseWriter {
 
@@ -56,7 +57,7 @@ class Response implements ResponseWriter {
 		}
 		if (!is_null($this->status)) {
 			$key = "HTTP/1.1 " . $this->status;
-			$val = self::$statusCodes[$this->status];
+			$val = Http::getStatusMessage($this->status);
 			$headers[$key] = $val;
 		}
 		return $headers;
