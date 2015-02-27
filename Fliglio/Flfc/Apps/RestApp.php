@@ -5,8 +5,8 @@ namespace Fliglio\Flfc\Apps;
 use Fliglio\Flfc\Context;
 use Fliglio\Flfc\UnmarshalledView;
 use Fliglio\Flfc\DefaultBody;
-use Fliglio\Flfc\Exceptions\PageNotFoundException;
-use Fliglio\Flfc\Exceptions\BadRequestException;
+use Fliglio\Http\Exceptions\NotFoundException;
+use Fliglio\Http\Exceptions\InternalServerErrorException;
 use Fliglio\Http\Http;
 
 class RestApp extends MiddleWare {
@@ -17,11 +17,15 @@ class RestApp extends MiddleWare {
 		try {
 			$this->wrappedApp->call($context);
 
-		} catch (PageNotFoundException $e) {
+		} catch (NotFoundException $e) {
 			$response->setStatus(Http::STATUS_NOT_FOUND);
 			$response->setContentType('application/json');
 			return;
-		} catch (BadRequestException $e) {
+		} catch (InternalServerErrorException $e) {
+			$response->setStatus(Http::STATUS_INTERNAL_SERVER_ERROR);
+			$response->setContentType('application/json');
+			return;
+		} catch (\Exception $e) {
 			error_log((string)$e);
 			$response->setStatus(Http::STATUS_INTERNAL_SERVER_ERROR);
 			$response->setContentType('application/json');
