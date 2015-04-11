@@ -8,6 +8,7 @@ use Fliglio\Flfc\DefaultBody;
 use Fliglio\Http\Exceptions\NotFoundException;
 use Fliglio\Http\Exceptions\InternalServerErrorException;
 use Fliglio\Http\Http;
+use Fliglio\Http\RenderableResponseBody;
 
 class RestApp extends MiddleWare {
 	
