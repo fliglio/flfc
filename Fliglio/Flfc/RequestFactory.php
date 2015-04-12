@@ -14,7 +14,7 @@ class RequestFactory {
 		$inst->setHost(self::getHost());
 		$inst->setUrl(self::getCurrentUrl());
 		$inst->setHttpMethod(self::getHttpMethod());
-		$inst->setPostData(self::getPostData());
+		$inst->setBody(self::getBody());
 		$inst->setGetParams(self::getGetParams());
 
 		$headers = self::getRequestHeaders();
@@ -53,7 +53,7 @@ class RequestFactory {
 		return Url::fromString($str);
 	}
 
-	private static function getPostData() {
+	private static function getBody() {
 		return file_get_contents('php://input');
 	}
 

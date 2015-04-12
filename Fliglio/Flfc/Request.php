@@ -23,7 +23,7 @@ class Request implements RequestReader {
 	/* GET request parameters, e.g. $_GET*/
 	private $getParams = array();
 
-	private $postData;
+	private $body;
 
 	public function __construct() {
 
@@ -44,8 +44,8 @@ class Request implements RequestReader {
 	public function setGetParams(array $getParams) {  $this->getParams = $getParams; }
 	public function getGetParams() {                  return $this->getParams; }
 
-	public function setPostData($postData) {          $this->postData = $postData; }
-	public function getPostData() {                   return $this->postData; }
+	public function setBody($body) {                  $this->body = $body; }
+	public function getBody() {                       return $this->body; }
 	
 	public function addHeader($key, $val) { 
 		$this->headers[strtolower($key)] = $val;
