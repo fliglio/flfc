@@ -7,6 +7,7 @@ use Fliglio\Flfc\UnmarshalledView;
 use Fliglio\Flfc\DefaultBody;
 use Fliglio\Http\Exceptions\NotFoundException;
 use Fliglio\Http\Exceptions\InternalServerErrorException;
+use Fliglio\Http\Exceptions\BadRequestException;
 use Fliglio\Http\Http;
 use Fliglio\Http\RenderableResponseBody;
 
