@@ -1,5 +1,6 @@
 ## Fligilo.Flfc
 
+[![Build Status](https://travis-ci.org/fliglio/flfc.svg?branch=master)](https://travis-ci.org/fliglio/flfc)
 
 ## Example
 
