@@ -28,13 +28,16 @@ class RestApp extends MiddleWare {
 			$response->setContentType('application/json');
 			return;
 		} catch (BadRequestException $e) {
+			error_log((string)$e);
 			$response->setStatus(Http::STATUS_BAD_REQUEST);
 			$response->setContentType('application/json');
+			$response->setBody(new DefaultBody($e->getMessage()));
 			return;
 		} catch (\Exception $e) {
 			error_log((string)$e);
 			$response->setStatus(Http::STATUS_INTERNAL_SERVER_ERROR);
 			$response->setContentType('application/json');
+			$response->setBody(new DefaultBody($e->getMessage()));
 			return;
 		}	
 
