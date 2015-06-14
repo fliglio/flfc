@@ -43,14 +43,7 @@ class HttpApp extends MiddleWare {
 		if (is_null($response->getStatus())) {
 			$response->setStatus(Http::STATUS_OK);
 		}
-				
-		$headers = $response->getHeaders();		
-		foreach ($headers AS $key => $val) {
-			header($key . ": " . $val);
-		}
 
-		if ($response->getBody()) {
-			$response->getBody()->render();
-		}
+		$response->write();
 	}
 }

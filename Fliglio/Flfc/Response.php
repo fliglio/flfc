@@ -80,6 +80,16 @@ class Response implements ResponseWriter {
 	public function getStatus() {
 		return $this->status;
 	}
-	
+
+	public function write() {
+		$headers = $this->getHeaders();		
+		foreach ($headers AS $key => $val) {
+			header($key . ": " . $val);
+		}
+
+		if ($this->getBody()) {
+			$this->getBody()->render();
+		}
+	}
 }
 
