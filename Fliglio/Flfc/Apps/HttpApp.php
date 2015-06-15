@@ -12,6 +12,9 @@ use Fliglio\Flfc\DefaultBody;
 use Fliglio\Http\RenderableResponseBody;
 use Fliglio\Http\Http;
 
+use Fliglio\Http\Exceptions\MovedPermanentlyException;
+use Fliglio\Http\Exceptions\FoundException;
+
 class HttpApp extends MiddleWare {
 	public function call(Context $context) {
 		
@@ -19,9 +22,12 @@ class HttpApp extends MiddleWare {
 		 */
 		try {
 			$this->wrappedApp->call($context);
-		} catch (RedirectException $e) {
+		} catch (MovedPermanentlyException $e) {
 			$context->getResponse()->addHeader("Location", (string)$e->getLocation());
-			$context->getResponse()->setStatus($e->getStatusCode());
+			$context->getResponse()->setStatus(Http::STATUS_MOVED_PERMANENTLY);
+		} catch (FoundException $e) {
+			$context->getResponse()->addHeader("Location", (string)$e->getLocation());
+			$context->getResponse()->setStatus(Http::STATUS_FOUND);
 		}
 
 		$response = $context->getResponse();
