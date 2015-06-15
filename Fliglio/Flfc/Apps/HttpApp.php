@@ -49,7 +49,6 @@ class HttpApp extends MiddleWare {
 		if (is_null($response->getStatus())) {
 			$response->setStatus(Http::STATUS_OK);
 		}
-
-		$response->write();
+		$context->getResponse()->write();
 	}
 }
