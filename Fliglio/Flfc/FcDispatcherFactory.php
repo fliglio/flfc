@@ -5,6 +5,10 @@ namespace Fliglio\Flfc;
 use Fliglio\Flfc\Apps\App;
 use Fliglio\Flfc\Exceptions\InternalRedirectException;
 
+
+/*
+ * @Deprecated implemented by fli appmux instead
+ */
 class FcDispatcherFactory {
 	
 	private $chain;
