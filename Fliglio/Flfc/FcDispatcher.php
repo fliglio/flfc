@@ -40,9 +40,9 @@ class FcDispatcher {
 			error_log($e->getMessage());
 			error_log((string)$e);
 			$this->context->getRequest()->setUrl($this->errorUrl);
-			$this->context->getRequest()->setProp('exception', $e);
 
 			$chain->call($this->context);
 		}	
+		
 	}
 }
