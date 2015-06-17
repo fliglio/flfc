@@ -8,6 +8,7 @@ use Fliglio\Flfc\DefaultBody;
 use Fliglio\Http\Exceptions\NotFoundException;
 use Fliglio\Http\Exceptions\InternalServerErrorException;
 use Fliglio\Http\Exceptions\BadRequestException;
+use Fliglio\Http\Exceptions\LocationStatusException;
 use Fliglio\Http\Http;
 use Fliglio\Http\RenderableResponseBody;
 
@@ -23,16 +24,24 @@ class RestApp extends MiddleWare {
 			$response->setStatus(Http::STATUS_NOT_FOUND);
 			$response->setContentType('application/json');
 			return;
+			
 		} catch (InternalServerErrorException $e) {
 			$response->setStatus(Http::STATUS_INTERNAL_SERVER_ERROR);
 			$response->setContentType('application/json');
 			return;
+
 		} catch (BadRequestException $e) {
 			error_log((string)$e);
 			$response->setStatus(Http::STATUS_BAD_REQUEST);
 			$response->setContentType('application/json');
 			$response->setBody(new DefaultBody($e->getMessage()));
 			return;
+
+		} catch (LocationStatusException $e) {
+			$response->setStatus($e->getStatusCode());
+			$response->addHeader("Location", (string)$e->getLocation());
+			return;
+
 		} catch (\Exception $e) {
 			error_log((string)$e);
 			$response->setStatus(Http::STATUS_INTERNAL_SERVER_ERROR);
