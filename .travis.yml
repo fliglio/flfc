@@ -12,4 +12,3 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit -v -c phpunit.xml
-
