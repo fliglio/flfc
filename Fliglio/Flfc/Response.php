@@ -38,9 +38,7 @@ class Response implements ResponseWriter {
 			$headers['Content-Type'] = $this->contentType;
 		}
 		if (!is_null($this->status)) {
-			$key = "HTTP/1.1 " . $this->status;
-			$val = Http::getStatusMessage($this->status);
-			$headers[$key] = $val;
+			http_response_code($this->status);
 		}
 		return $headers;
 	}
