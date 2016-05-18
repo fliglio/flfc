@@ -16,15 +16,15 @@ use Fliglio\Http\Exceptions\MovedPermanentlyException;
 use Fliglio\Http\Exceptions\FoundException;
 
 class HttpApp extends MiddleWare {
+
 	public function call(Context $context) {
-		
-		/* Call Child App
-		 */
 		try {
 			$this->wrappedApp->call($context);
+
 		} catch (MovedPermanentlyException $e) {
 			$context->getResponse()->addHeader("Location", (string)$e->getLocation());
 			$context->getResponse()->setStatus(Http::STATUS_MOVED_PERMANENTLY);
+
 		} catch (FoundException $e) {
 			$context->getResponse()->addHeader("Location", (string)$e->getLocation());
 			$context->getResponse()->setStatus(Http::STATUS_FOUND);
@@ -33,6 +33,7 @@ class HttpApp extends MiddleWare {
 		$response = $context->getResponse();
 
 		$body = $response->getBody();
+
 		if (!is_null($body)) {
 			if (!($body instanceof RenderableResponseBody)) {
 				if (is_string($body->getContent())) {
@@ -45,10 +46,11 @@ class HttpApp extends MiddleWare {
 			$response->setBody(new DefaultBody(''));
 		}
 
-
 		if (is_null($response->getStatus())) {
 			$response->setStatus(Http::STATUS_OK);
 		}
+
 		$context->getResponse()->write();
 	}
+
 }
