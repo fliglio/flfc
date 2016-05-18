@@ -37,11 +37,7 @@ class Response implements ResponseWriter {
 		if (!is_null($this->contentType)) {
 			$headers['Content-Type'] = $this->contentType;
 		}
-		if (!is_null($this->status)) {
-			$key = "HTTP/1.1 " . $this->status;
-			$val = Http::getStatusMessage($this->status);
-			$headers[$key] = $val;
-		}
+
 		return $headers;
 	}
 	public function hasHeader($key) {
@@ -64,8 +60,12 @@ class Response implements ResponseWriter {
 	}
 
 	public function write() {
-		$headers = $this->getHeaders();		
-		foreach ($headers AS $key => $val) {
+		if (!is_null($this->status)) {
+			$statusMsg = Http::getStatusMessage($this->status);
+			header(sprintf("HTTP/1.1 %s %s", $this->status, $statusMsg));
+		}
+
+		foreach ($this->getHeaders() AS $key => $val) {
 			header($key . ": " . $val);
 		}
 
