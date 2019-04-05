@@ -26,9 +26,9 @@ class RequestFactory {
 	}
 
 	private static function getHost() {
-		return isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : (
+		return isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : (
 				isset($_SERVER['HOSTNAME']) ? $_SERVER['HOSTNAME'] : (
-					isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : (
+					isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : (
 						isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : (
 							'localhost'
 						)
