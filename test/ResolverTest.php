@@ -42,6 +42,7 @@ class ResolverTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->fooApp->called, 1);
 		$this->assertEquals($this->barApp->called, 0);
 	}
+	
 	public function testNamespaceResolver() {
 
 		// when

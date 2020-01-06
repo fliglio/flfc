@@ -3,11 +3,6 @@
 namespace Fliglio\Flfc\Apps;
 
 use Fliglio\Flfc\Context;
-use Fliglio\Flfc\HasHeadersToSet;
-use Fliglio\Flfc\Exceptions\RedirectException;
-use Fliglio\Flfc\Exceptions\Streamable;
-use Fliglio\Flfc\ResponseContent;
-use Fliglio\Flfc\Response;
 use Fliglio\Flfc\DefaultBody;
 use Fliglio\Http\RenderableResponseBody;
 use Fliglio\Http\Http;

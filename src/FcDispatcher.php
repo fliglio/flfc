@@ -2,13 +2,12 @@
 
 namespace Fliglio\Flfc;
 
-use Fliglio\Flfc\Apps\App;
 use Fliglio\Http\Exceptions\NotFoundException;
 use Fliglio\Flfc\Exceptions\InternalRedirectException;
 
 class FcDispatcher {
 	
-	private $chain;
+	private $chains;
 	private $context;
 	private $notFoundUrl;
 	private $errorUrl;

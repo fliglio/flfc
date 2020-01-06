@@ -2,19 +2,12 @@
 
 namespace Fliglio\Flfc;
 
-use Fliglio\Flfc\Apps\App;
-use Fliglio\Flfc\Exceptions\InternalRedirectException;
-
-
 /*
  * @Deprecated implemented by fli appmux instead
  */
 class FcDispatcherFactory {
 	
-	private $chain;
-	
-	public function __construct() {
-	}
+	public function __construct() {}
 	
 	public function createDefault(FcChainRegistry $chains) {
 		$reqF = new RequestFactory();
@@ -23,6 +16,5 @@ class FcDispatcherFactory {
 
 		return new FcDispatcher($chains, $context, '@404', '@error');
 	}
-
 	
 }

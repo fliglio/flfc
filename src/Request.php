@@ -25,9 +25,7 @@ class Request implements RequestReader {
 
 	private $body;
 
-	public function __construct() {
-
-	}
+	public function __construct() {}
 
 	public function setHttpMethod($method) {          $this->method = $method; }
 	public function getHttpMethod() {                 return $this->method; }
