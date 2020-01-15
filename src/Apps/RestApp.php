@@ -3,7 +3,6 @@
 namespace Fliglio\Flfc\Apps;
 
 use Fliglio\Flfc\Context;
-use Fliglio\Flfc\UnmarshalledView;
 use Fliglio\Flfc\DefaultBody;
 use Fliglio\Http\Exceptions\NotFoundException;
 use Fliglio\Http\Exceptions\InternalServerErrorException;
