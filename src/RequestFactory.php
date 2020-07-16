@@ -15,8 +15,8 @@ class RequestFactory {
 		$inst->setUrl(self::getCurrentUrl());
 		$inst->setHttpMethod(self::getHttpMethod());
 		$inst->setBody(self::getBody());
-		$inst->setGetParams(self::getGetParams());
 		$inst->setFiles(self::getFiles());
+		$inst->setGetParams(self::getGetParams());
 
 		$headers = self::getRequestHeaders();
 		foreach ($headers as $key => $val) {
@@ -28,14 +28,14 @@ class RequestFactory {
 
 	private static function getHost() {
 		return isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : (
-		isset($_SERVER['HOSTNAME']) ? $_SERVER['HOSTNAME'] : (
-		isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : (
-		isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : (
-		'localhost'
-		)
-		)
-		)
-		);
+				isset($_SERVER['HOSTNAME']) ? $_SERVER['HOSTNAME'] : (
+					isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : (
+						isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : (
+							'localhost'
+						)
+					)
+				)
+			);
 	}
 
 	private static function getProtocol() {
@@ -61,6 +61,7 @@ class RequestFactory {
 	private static function getGetParams() {
 		return $_GET;
 	}
+
 	private static function getFiles() {
 		return $_FILES;
 	}
