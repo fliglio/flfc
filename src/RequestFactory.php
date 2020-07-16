@@ -15,6 +15,7 @@ class RequestFactory {
 		$inst->setUrl(self::getCurrentUrl());
 		$inst->setHttpMethod(self::getHttpMethod());
 		$inst->setBody(self::getBody());
+		$inst->setFiles(self::getFiles());
 		$inst->setGetParams(self::getGetParams());
 
 		$headers = self::getRequestHeaders();
@@ -61,6 +62,10 @@ class RequestFactory {
 		return $_GET;
 	}
 
+	private static function getFiles() {
+		return $_FILES;
+	}
+
 	private static function getRequestHeaders() {
 		$headers = array();
 		if (function_exists('apache_request_headers')) {
@@ -73,7 +78,7 @@ class RequestFactory {
 				} else if (strtolower($key) == 'authorization') {
 					$headers['authorization'] = $val;
 				}
-					
+
 			}
 		}
 		return $headers;
