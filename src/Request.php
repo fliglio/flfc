@@ -5,7 +5,7 @@ namespace Fliglio\Flfc;
 use Fliglio\Http\RequestReader;
 
 class Request implements RequestReader {
-	
+
 	private $host;
 
 	/* protocol: http/https */
@@ -18,10 +18,13 @@ class Request implements RequestReader {
 	private $method;
 
 	/* array of headers */
-	private $headers = array();
+	private $headers = [];
 
 	/* GET request parameters, e.g. $_GET*/
-	private $getParams = array();
+	private $getParams = [];
+
+	/* files array for multipart uploads, $_FILES */
+	private $files = [];
 
 	private $body;
 
@@ -44,8 +47,11 @@ class Request implements RequestReader {
 
 	public function setBody($body) {                  $this->body = $body; }
 	public function getBody() {                       return $this->body; }
-	
-	public function addHeader($key, $val) { 
+
+	public function setFiles(array $files) {          $this->files = $files; }
+	public function getFiles() {                      return $this->files; }
+
+	public function addHeader($key, $val) {
 		$this->headers[strtolower($key)] = $val;
 	}
 	public function getHeaders() {
@@ -54,7 +60,7 @@ class Request implements RequestReader {
 	public function isHeaderSet($key) {
 		return isset($this->headers[strtolower($key)]);
 	}
-	public function getHeader($key) { 
+	public function getHeader($key) {
 		return $this->headers[strtolower($key)];
 	}
 }
